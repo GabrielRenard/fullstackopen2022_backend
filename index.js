@@ -24,6 +24,8 @@ let persons = [
   },
 ];
 
+app.use(express.json());
+
 const info = `<p>Phonebook has info for ${
   persons.length
 } people</p><p>${new Date()}</p>`;
@@ -51,6 +53,31 @@ app.delete("/api/persons/:id", (request, response) => {
   persons = persons.filter(person => person.id !== id);
 
   response.status(204).end();
+});
+
+const generateId = () => {
+  const id = Math.floor(Math.random() * 100000);
+  return id;
+};
+
+app.post("/api/persons", (request, response) => {
+  const id = generateId();
+
+  if (!request.body) {
+    return response.status(400).json({
+      error: "content missing",
+    });
+  }
+
+  const person = {
+    id,
+    name: request.body.name || "",
+    number: request.body.number || "",
+  };
+
+  persons = persons.concat(person);
+
+  response.json(person);
 });
 
 const PORT = 3001;
