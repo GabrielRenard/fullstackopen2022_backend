@@ -32,6 +32,7 @@
 - #### Postman & VS Code REST Client for Testing
 - #### HTTP Standards: Safety & Idempotence
 - #### Middlewares
+- #### Cross Origin Resource Sharing (CORS)
 
 ### Project
 
